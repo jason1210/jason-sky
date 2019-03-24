@@ -3,6 +3,7 @@ package com.jason.sky.controller;
 import com.jason.sky.entity.User;
 import com.jason.sky.service.UserService;
 import com.jason.sky.util.IpUtil;
+import com.jason.sky.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +22,9 @@ public class UserController extends BaseController {
     private UserService userService;
 
     @GetMapping("/getUserDetail/{id}")
-    public User getUserDetail(@PathVariable(name = "id") Long id, @RequestParam(name = "status") String status) {
+    public Result getUserDetail(@PathVariable(name = "id") Long id, @RequestParam(name = "status") String status) {
         User user = userService.queryUserById(id);
-        return user;
+        return Result.success(user);
     }
 
     @PostMapping("/register")
