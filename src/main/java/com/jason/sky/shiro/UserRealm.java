@@ -1,6 +1,5 @@
 package com.jason.sky.shiro;
 
-import com.jason.sky.entity.Role;
 import com.jason.sky.entity.User;
 import com.jason.sky.service.UserService;
 import org.apache.shiro.authc.*;
@@ -8,7 +7,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +46,13 @@ public class UserRealm extends AuthorizingRealm {
         Set<String> pemissionSet = new HashSet<String>();
         //for (Role roleInfo : roleIdSet) {
         //    int roleId = roleInfo.getId();
-            //roleSet.add( userService.findRoleByRoleId( roleId  ) );
-            //将拥有角色的所有权限放进Set里面，也就是求Set集合的并集
-            //pemissionIdSet.addAll( userService.findPermissionIdByRoleId(  roleId ));
+        //roleSet.add( userService.findRoleByRoleId( roleId  ) );
+        //将拥有角色的所有权限放进Set里面，也就是求Set集合的并集
+        //pemissionIdSet.addAll( userService.findPermissionIdByRoleId(  roleId ));
         //}
         //for (int permissionId : pemissionIdSet) {
-            //String permission= userService.findPermissionById( permissionId ).getPermission() ;
-            //pemissionSet.add(  permission );
+        //String permission= userService.findPermissionById( permissionId ).getPermission() ;
+        //pemissionSet.add(  permission );
         //}
         // 将角色名称组成的Set提供给授权info
         authorizationInfo.setRoles(roleSet);
