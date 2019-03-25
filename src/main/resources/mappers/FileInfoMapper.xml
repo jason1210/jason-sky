@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jason.sky.mapper.FileInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jason.sky.entity.FileInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="original_name" jdbcType="VARCHAR" property="originalName" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="biz_type" jdbcType="VARCHAR" property="bizType" />
+    <result column="new_name" jdbcType="VARCHAR" property="newName" />
+    <result column="file_size" jdbcType="VARCHAR" property="fileSize" />
+    <result column="relative_path" jdbcType="VARCHAR" property="relativePath" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="del_flag" jdbcType="BIT" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, original_name, file_type, user_id, file_path, creat_time, description, biz_type, 
+    new_name, file_size, relative_path, last_update_time, del_flag
+  </sql>
+  <select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file_info
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from file_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from file_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jason.sky.entity.FileInfo">
+    insert into file_info (id, original_name, file_type, 
+      user_id, file_path, creat_time, 
+      description, biz_type, new_name, 
+      file_size, relative_path, last_update_time, 
+      del_flag)
+    values (#{id,jdbcType=BIGINT}, #{originalName,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{filePath,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR}, #{bizType,jdbcType=VARCHAR}, #{newName,jdbcType=VARCHAR}, 
+      #{fileSize,jdbcType=VARCHAR}, #{relativePath,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jason.sky.entity.FileInfo">
+    insert into file_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="originalName != null">
+        original_name,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+      <if test="creatTime != null">
+        creat_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="bizType != null">
+        biz_type,
+      </if>
+      <if test="newName != null">
+        new_name,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="relativePath != null">
+        relative_path,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="originalName != null">
+        #{originalName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null">
+        #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="newName != null">
+        #{newName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="relativePath != null">
+        #{relativePath,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jason.sky.entity.FileInfo">
+    update file_info
+    <set>
+      <if test="originalName != null">
+        original_name = #{originalName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null">
+        biz_type = #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="newName != null">
+        new_name = #{newName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="relativePath != null">
+        relative_path = #{relativePath,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jason.sky.entity.FileInfo">
+    update file_info
+    set original_name = #{originalName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      biz_type = #{bizType,jdbcType=VARCHAR},
+      new_name = #{newName,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=VARCHAR},
+      relative_path = #{relativePath,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

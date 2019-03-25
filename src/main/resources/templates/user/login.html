@@ -3,13 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
+    <script src="/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
-<form action="/user/login">
-    <input type="text" name="username" value=""/>
-    <input type="password" name="password" value=""/>
+<form>
+    用户名：<input type="text" id="username" name="username" value=""/></br>
+    密码：<input type="password" id="password" name="password" value=""/></br>
+    <input type="submit" value="登录" onclick="login()">
 </form>
 
 </body>
+<script language=javascript type=text/javascript>
+    function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username == "") {
+            alert("用户名不能为空");
+            return false;
+        }
+        if (password == "") {
+            alert("密码不能为空");
+            return false;
+        }
+        var jsonObj = {"username": username, "password": password};
+        alert("login")
+        $.ajax({
+            url: '/user/login',
+            type: 'post',
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(jsonObj),
+            success: function () {
+                window.location.href ="/";
+            },
+            error: function (data) {
+                alert("fail to login  !"+JSON.stringify(data));
+            }
+        })
+    }
+</script>
 </html>

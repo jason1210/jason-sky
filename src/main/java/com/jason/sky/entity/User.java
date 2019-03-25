@@ -1,6 +1,7 @@
 package com.jason.sky.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Long id;
@@ -38,6 +39,10 @@ public class User {
     private String sourceIp;
 
     private Integer age;
+
+    private String salt;
+
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -181,5 +186,21 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
