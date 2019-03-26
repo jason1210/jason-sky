@@ -84,8 +84,8 @@ public class UserRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
         //密码可以通过SimpleHash加密，然后保存进数据库。
-        //此处是获取数据库内的账号、密码、盐值，保存到登陆信息info中
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUsername(),
+        //此处是获取数据库内的账号、密码、盐值，保存到登陆信息info中;后续可以直接通过User user = (User)subject.getPrincipal()获取用户信息
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,
             user.getPassword(),
             getName());                   //realm name
 
