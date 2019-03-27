@@ -25,8 +25,14 @@
     id, username, password, gmt_create, gmt_modified, remark, type, status, phone, email, 
     address, job, company, sex, education, realname, source_ip, age
   </sql>
-  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="countByName" parameterType="java.lang.String" resultType="java.lang.Integer">
     select 
+    count(id)
+    from user
+    where username = #{username,jdbcType=BIGINT}
+  </select>
+  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from user
     where username = #{username,jdbcType=BIGINT}

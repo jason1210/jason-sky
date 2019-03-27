@@ -4,6 +4,7 @@ import com.jason.sky.entity.FileConf;
 import com.jason.sky.entity.FileInfo;
 import com.jason.sky.mapper.FileConfMapper;
 import com.jason.sky.mapper.FileInfoMapper;
+import com.jason.sky.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class FileUploadService {
     @Autowired
     private FileInfoMapper fileInfoMapper;
 
-    protected static Logger log = LoggerFactory.getLogger(FileUploadService.class);
+    private static Logger log = LoggerFactory.getLogger(FileUploadService.class);
 
     /**
      * 文件上传
@@ -69,7 +70,6 @@ public class FileUploadService {
         if (!serFile.exists()) {
             serFile.mkdirs();
         }
-
         // 循环上传文件
         for (MultipartFile mpf : mpfList) {
             String originalFileName = mpf.getOriginalFilename(); // 获取源文件名
@@ -78,7 +78,7 @@ public class FileUploadService {
                 + originalFileName.substring(originalFileName.lastIndexOf("."));
             // 组装数据
             fileInfo = new FileInfo();
-            fileInfo.setUserId(1L);
+            fileInfo.setUserId(UserUtil.getUserInfo().getId());
             fileInfo.setOriginalName(originalFileName);
             fileInfo.setFileSize(String.valueOf(mpf.getSize() / 1024)); // 单位（kb）
             fileInfo.setFileType(mpf.getContentType());     // 文件类型
@@ -119,7 +119,7 @@ public class FileUploadService {
         return true;
     }
 
-    public List<FileInfo> getFiles(Long userId){
+    public List<FileInfo> getFiles(Long userId) {
         return fileInfoMapper.selectByUserId(userId);
     }
 }

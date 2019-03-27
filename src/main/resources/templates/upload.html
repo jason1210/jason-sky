@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>fileUpload Test</title>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         var xhr;
         var ot;//
@@ -79,6 +80,7 @@
         function cancleUploadFile(){
             xhr.abort();
         }
+
     </script>
 </head>
 <body>
@@ -88,5 +90,13 @@
 <input type="file" id="file" name="myfile" multiple="multiple"/>
 <input type="button" onclick="upladFile()" value="上传(多选)" />
 <input type="button" onclick="cancleUploadFile()" value="取消" />
+
+<div>
+    <ul>
+        <li  th:each="fileInfo : ${fileInfos}" th:text="'姓名：' + ${fileInfo.originalName} + '，年龄：' + ${fileInfo.relativePath}">
+
+        </li>
+    </ul>
+</div>
 </body>
 </html>

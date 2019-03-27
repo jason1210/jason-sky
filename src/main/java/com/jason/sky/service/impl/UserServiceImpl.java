@@ -57,4 +57,8 @@ public class UserServiceImpl implements UserService {
         roleMapper.insert(role);
         return role;
     }
+
+    public boolean existsByName(String username) {
+        return userMapper.countByName(username) > 0 ? true : false;
+    }
 }

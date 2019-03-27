@@ -18,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User findByName(String name);
+
+    int countByName(String username);
 }

@@ -5,25 +5,37 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<form>
-    用户名：<input type="text" id="username" name="username" value=""/></br>
-    密码：<input type="password" id="password" name="password" value=""/></br>
-    性别：<select>
-    <option value="1">
-        男
-    </option>
-    <option value="0">
-        女
-    </option>
-</select></br>
-    <input type="submit" value="注册" onclick="register()">
-</form>
+<div>
+    <p>
+        用户名：<input type="text" id="username" name="username" value=""/>
+    </p>
+    <p>
+        密码：<input type="password" id="password" name="password" value=""/>
+    </p>
+    <p>
+        性别：<select id="sex">
+                <option value="1">
+                    男
+                </option>
+                <option value="0">
+                    女
+                </option>
+             </select>
+    </p>
+    <p>
+        <input type="submit" value="注册" onclick="register()">
+    </p>
+    <p>
+        if u have a account ,please login here.<a href="/toLogin">login</a>
+    </p>
+</div>
 
 </body>
 <script language=javascript type=text/javascript>
     function register() {
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
+        var sex = document.getElementById("sex").value;
         if (username == "") {
             alert("用户名不能为空");
             return false;
@@ -32,18 +44,22 @@
             alert("密码不能为空");
             return false;
         }
-        var jsonObj = {"username": username, "password": password};
+        var jsonObj = {"username": username, "password": password, "sex": sex};
         $.ajax({
-            url: '/user/register',
+            url: '/register',
             type: 'post',
             dataType: 'json',
             contentType: "application/json;charset=utf-8",
             data: JSON.stringify(jsonObj),
             success: function (data) {
-                alert("success to register  !");
+                if(data.code !=200){
+                    alert(data.message);
+                }else {
+                    window.location.href ="/";
+                }
             },
             error: function (data) {
-                alert("fail to register  !");
+                alert("注册失败！");
             }
         })
     }

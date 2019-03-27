@@ -6,13 +6,22 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
+<div>
+    <p>
+        用户名：<input type="text" id="username" name="username" value=""/></br>
+    </p>
+    <p>
+        密码：<input type="password" id="password" name="password" value=""/></br>
+    </p>
+    <p>
+        <input type="submit" value="登录" onclick="login()">
+    </p>
 
-<form>
-    用户名：<input type="text" id="username" name="username" value=""/></br>
-    密码：<input type="password" id="password" name="password" value=""/></br>
-    <input type="submit" value="登录" onclick="login()">
-</form>
+    <p>
+        if u have not a account , please register here.<a href="/toRegister">register</a>
+    </p>
 
+</div>
 </body>
 <script language=javascript type=text/javascript>
     function login() {
@@ -28,15 +37,20 @@
         }
         var jsonObj = {"username": username, "password": password};
         $.ajax({
-            url: '/user/login',
+            url: '/login',
             type: 'post',
+            dataType: 'json',
             contentType: "application/json;charset=utf-8",
             data: JSON.stringify(jsonObj),
-            success: function () {
-                window.location.href ="/";
+            success: function (data) {
+                if(data.code !=200){
+                    alert(data.message);
+                }else {
+                    window.location.href ="/";
+                }
             },
             error: function (data) {
-                alert("fail to login  !"+JSON.stringify(data));
+                alert("登录失败！");
             }
         })
     }

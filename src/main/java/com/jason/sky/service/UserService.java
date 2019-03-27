@@ -18,4 +18,6 @@ public interface UserService {
     User findByName(String name);
 
     Role addRole(Map<String, Object> map);
+
+    boolean existsByName(String username);
 }

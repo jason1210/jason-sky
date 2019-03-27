@@ -2,7 +2,10 @@ package com.jason.sky.controller;
 
 import com.jason.sky.entity.FileInfo;
 import com.jason.sky.service.FileUploadService;
+import com.jason.sky.util.UserUtil;
+import com.jason.sky.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,15 +31,15 @@ public class FileUploadController {
      * @return
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public List<FileInfo> uploadFile(MultipartHttpServletRequest request, String bizType) {
+    public List<FileInfo> uploadFile(Model model, MultipartHttpServletRequest request, String bizType) {
         List<FileInfo> result = this.fileUploadService.uploadFile(request.getMultiFileMap().get("fileData"), bizType);
         return result;
     }
 
     @GetMapping("/getFiles")
-    public List<FileInfo> getFiles(Long userId) {
-        List<FileInfo> result = this.fileUploadService.getFiles(userId);
-        return result;
+    public Result getFiles() {
+        List<FileInfo> result = this.fileUploadService.getFiles(UserUtil.getUserInfo().getId());
+        return Result.success(result);
     }
 
 }
